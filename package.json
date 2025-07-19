@@ -1,0 +1,20 @@
+{
+  "name": "kwk-scrollytelling-template",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://jasminesamra.github.io/kwk-scrollytelling-template",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "npm run build && gh-pages -d dist",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@highcharts/svelte": "^1.1.1",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "gh-pages": "^6.3.0",
+    "svelte": "^5.28.1",
+    "vite": "^6.3.5"
+  }
+}
