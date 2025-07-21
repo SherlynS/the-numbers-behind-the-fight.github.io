@@ -12,9 +12,14 @@
   },
   "devDependencies": {
     "@highcharts/svelte": "^1.1.1",
+    "@rollup/plugin-dsv": "^3.0.5",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
     "gh-pages": "^6.3.0",
     "svelte": "^5.28.1",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "highcharts": "^12.3.0"
   }
 }

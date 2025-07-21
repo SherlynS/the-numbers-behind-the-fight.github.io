@@ -1,69 +1,97 @@
-<script>
+<script lang="ts">
     import * as Highcharts from "highcharts";
     import "highcharts/modules/exporting";
     import { Chart } from "@highcharts/svelte";
     import Scroller from "../lib/Scroller.svelte";
     import ArticleText from "../lib/ArticleText.svelte";
+    import loansNJ from "../../7a_loans_NEW2.csv";
+    import type { Options } from "highcharts";
 
-    let options = {
+    interface LoanData {
+        state_name: string;
+        loan_type: string;
+        approval_fiscal_year: number;
+        number_of_loans: string;
+        geo_name: string;
+    }
+
+    function processNJLoansData(data: any[]) {
+        // Change parameter type to any[] temporarily
+        const currentYear = new Date().getFullYear();
+
+        const njLoans = data
+            .map((row) => ({
+                ...row,
+                // Convert string values to numbers
+                approval_fiscal_year: parseInt(row.approval_fiscal_year, 10),
+                number_of_loans: parseFloat(row.number_of_loans),
+            }))
+            .filter(
+                (row) =>
+                    row.state_name === "New Jersey" &&
+                    row.loan_type === "7(a) Loans" &&
+                    row.approval_fiscal_year >= currentYear - 10,
+            );
+
+        njLoans.sort((a, b) => a.approval_fiscal_year - b.approval_fiscal_year);
+
+        return njLoans.map((loan) => ({
+            x: Date.UTC(loan.approval_fiscal_year, 0, 1),
+            y: loan.number_of_loans,
+            name: loan.geo_name,
+        }));
+    }
+
+    // Chart options
+    const options: Options = {
         chart: {
-            type: "pie",
+            type: "column",
+            //zoomType: "x",
         },
         title: {
-            text: "An Example Pie Chart",
+            text: "7(a) Loans in New Jersey (Past 10 Years)",
+        },
+        subtitle: {
+            text: "Loan amounts over time",
+        },
+        xAxis: {
+            type: "datetime",
+            title: {
+                text: "Year",
+            },
+        },
+        yAxis: {
+            title: {
+                text: "Number of loans",
+            },
+            labels: {
+                formatter: function () {
+                    return this.value.toLocaleString();
+                },
+            },
+        },
+        tooltip: {
+            pointFormat: "<b>{point.y:,.0f}</b>",
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                dataLabels: [
-                    {
-                        enabled: true,
-                        distance: 20,
+            area: {
+                marker: {
+                    radius: 2,
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1,
                     },
-                    {
-                        enabled: true,
-                        distance: -40,
-                        format: "{point.percentage:.1f}%",
-                        style: {
-                            fontSize: "1.2em",
-                            textOutline: "none",
-                        },
-                        filter: {
-                            operator: ">",
-                            property: "percentage",
-                            value: 10,
-                        },
-                    },
-                ],
+                },
+                threshold: null,
             },
         },
         series: [
             {
-                name: "Group",
-                data: [
-                    {
-                        name: "Group 1",
-                        y: 151,
-                    },
-                    {
-                        name: "Group 2",
-                        sliced: true,
-                        selected: true,
-                        y: 180,
-                    },
-                    {
-                        name: "Group 3",
-                        y: 32,
-                    },
-                    {
-                        name: "Group 4",
-                        y: 103,
-                    },
-                    {
-                        name: "Group 5",
-                        y: 77,
-                    },
-                ],
+                type: "column", // Add this line
+                name: "7(a) Loans",
+                data: processNJLoansData(loansNJ),
             },
         ],
     };
@@ -107,21 +135,23 @@
 
         {#snippet scrolly()}
             <ArticleText>
-                <strong>Welcome to the KWK Data Scrollytelling Template!</strong
+                <strong
+                    >Why did the right charachter struggle with finding a job?</strong
                 >
             </ArticleText>
 
             <ArticleText>
-                This is a <strong>basic example</strong> of how you might create
-                a scrollytelling piece using Svelte and Highcharts.
+                It would be safe to assume that because small business are
+                opening, then that would indicate more job opportunities,
+                nationally that is the strong case, but in <strong
+                    >Hudson county, NJ</strong
+                >
+                that isn't the case.
             </ArticleText>
 
             <ArticleText>
-                You can use this template as a <strong>starting point</strong>
-                for your project.
-                <br /><br />
-                Or, if you want to build something from scratch, you can use it as
-                a <strong>reference</strong> for specific functionality.
+                Let't take a closer look at the data in order to understand why
+                this is the case nationally.
             </ArticleText>
 
             <ArticleText>
