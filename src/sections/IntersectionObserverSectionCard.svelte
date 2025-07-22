@@ -1,11 +1,13 @@
 <script>
     import TitleCard from "../lib/TitleCard.svelte";
 
-    const title =
-        "The following examples show the use of the Intersection Observer API";
-    const subtitle =
-        "Be sure to read through the text on this page and also " +
-        "poke around in the code to fully understand how they work!";
+    const title = `The general take away is for us to invest in dreams 
+        not who people are or what they identify as.`;
+    const subtitleLines = [
+        "Thank you for taking the time to read through my website." +
+            " Wanna help me make a change in Hudson County?" +
+            " Schedule a time to meet : https://calendly.com/saavedrasherlynedu",
+    ];
 </script>
 
-<TitleCard {title} {subtitle} />
+<TitleCard {title} subtitle={subtitleLines} />

@@ -4,122 +4,65 @@
     import { Chart } from "@highcharts/svelte";
     import Scroller from "../lib/Scroller.svelte";
     import ArticleText from "../lib/ArticleText.svelte";
+    import HDJImage from "./HDJ_urate.jpeg";
 
-    const series = [
-        {
-            name: "Group 1",
-            data: [
-                [1990, 3],
-                [2000, 4],
-                [2010, 1],
-                [2020, 1],
-            ],
-            color: "#8427c9",
-        },
-        {
-            name: "Group 2",
-            data: [
-                [1990, 2],
-                [2000, 5],
-                [2010, -2],
-                [2020, 2],
-            ],
-            color: "#ff99fc",
-        },
-        {
-            name: "Group 3",
-            data: [
-                [1990, 4],
-                [2000, 3],
-                [2010, 0],
-                [2020, 3],
-            ],
-            color: "#4096fa",
-        },
-    ];
 
-    let chart;
-    let thirdSeriesVisible = false;
+    let imageVisible = true;
 
-    let options = {
-        chart: {
-            type: "spline",
-            backgroundColor: "#e3ff00",
-            borderColor: "#007052",
-            borderWidth: 5,
-            borderRadius: 20,
-        },
-        title: {
-            text: "Another Example Chart",
-        },
-        subtitle: {
-            text: "With a subtitle! And styling!",
-        },
-        series: [series[0], series[1]],
-    };
-
-    function toggleThirdSeries() {
-        const existingSeries = chart.series.find((s) => s.name === "Group 3");
-
-        if (existingSeries) {
-            existingSeries.remove();
-            thirdSeriesVisible = false;
-        } else {
-            chart.addSeries(series[2]);
-            thirdSeriesVisible = true;
-        }
+    function toggleImage() {
+        imageVisible = !imageVisible;
     }
 </script>
 
 <div>
     <Scroller layout="left">
         {#snippet sticky()}
-            <div class="chart">
-                <Chart bind:chart {options} highcharts={Highcharts} />
-            </div>
-            <button on:click={toggleThirdSeries} class="toggle-button">
-                {thirdSeriesVisible ? "Remove Group 3" : "Add Group 3"}
+            <!-- Replace the chart div and button with this: -->
+            {#if imageVisible}
+                <div class="image-container">
+                    <img
+                        src={HDJImage}
+                        alt="Chart showing unemployment data for Hudson County"
+                        class="chart-image"
+                    />
+                </div>
+            {/if}
+
+            <button on:click={toggleImage} class="toggle-button">
+                {imageVisible ? "Hide Chart" : "Show Chart"}
             </button>
+
             <div>
+                <p>Feel free to click on the button to reveal the chart.</p>
                 <p>
-                    You can use Svelte to add and remove data from a Highcharts
-                    chart.
-                </p>
-                <p>
-                    When you click the button above, a third group is toggled in
-                    the chart. Check out the source code to see how it's done.
-                </p>
-                <p>
-                    <strong
-                        >🤔 How might you use other HTML elements, like
-                        checkboxes or radio buttons, in a similar way to filter
-                        data?</strong
-                    >
+                    <strong>
+                        Hudson county is a region within New Jersey.
+                    </strong>
                 </p>
             </div>
         {/snippet}
 
         {#snippet scrolly()}
             <ArticleText>
-                You might notice that this basic template doesn't have certain
-                features that are common in scrollytelling.
+                Looking at this specific piece of data from the BWDC website, we
+                can say for sure that the rate on uneployment is higher within
+                Hudson County than it is Nationally.
             </ArticleText>
 
             <ArticleText>
-                For example, you might want a component that doesn't feature a
-                sticky component at all. Or a component that is solely a sticky
-                component.
+                This brings us back to our main question : <br><strong>Why is there a high number of loans distributed over the years 
+                in New Jersey, but the rate of unemployment within an area of New Jersey is high? 
+                </strong>
             </ArticleText>
 
             <ArticleText>
-                You might also want to add more interactivity or gamify parts of
-                your scrollytelling piece.
+                Why is the correlation not correlating? 
             </ArticleText>
 
             <ArticleText>
+                Well the answer is simple : 
                 <strong>
-                    It's up to you to research how to create the effects and
-                    functionality that you envision!
+                Lack of funds for a better education. 
                 </strong>
             </ArticleText>
         {/snippet}
@@ -127,9 +70,11 @@
 </div>
 
 <style>
-    .chart {
-        width: 90%;
+    .chart-image{
         margin: 0px auto;
+        width: 80%; 
+        height: auto; 
+        display: block; 
     }
 
     .toggle-button {

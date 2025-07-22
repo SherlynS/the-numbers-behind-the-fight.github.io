@@ -91,6 +91,7 @@
             {
                 type: "column", // Add this line
                 name: "7(a) Loans",
+                color: "#2ecc71",
                 data: processNJLoansData(loansNJ),
             },
         ],
@@ -104,64 +105,53 @@
                 <Chart {options} highcharts={Highcharts} />
             </div>
             <p>
-                Here's an example chart using
-                <a href="https://www.highcharts.com/">Highcharts</a>!
-            </p>
-            <p>
-                📈 <strong>Highcharts</strong> is a super-flexible library for
-                creating all kinds of charts. See demos of different chart types
-                <a href="https://www.highcharts.com/demo">here</a>.
-            </p>
-            <p>
-                Since we're using Highcharts through Svelte, the syntax is a
-                little different from what you might see in the demos. But all
-                of Highcharts' functionality is available through the Highcharts
-                for Svelte package.
-            </p>
-            <p>
-                The configuration is done through the
-                <code>options</code> json object passed to the chart, which you'll
-                see in the source code for this template.
-            </p>
-            <p>
-                Use the
-                <a href="https://api.highcharts.com/highcharts/"
-                    >API reference</a
+                This a chart that shows the total number of loans that have been
+                given out in New Jersey for the past few years.
+                <a
+                    href="https://public.tableau.com/app/profile/harsha.mallajosyula5209/viz/BWDC-BusinessOwnership-Section2_1/Dashboard-BusinessOwnership-Section2_1"
                 >
-                to understand what each element in the <code>options</code> object
-                does.
+                    Offical BWDC chart</a
+                >!
+            </p>
+            <p>
+                📈 <strong> Number of loans </strong> are important to consider because
+                they allow us to understand how much suppot is being provided to
+                new businesses.
+            </p>
+            <p>Feel free to hover over the data and explore!</p>
+            <p>
+                Now let's go ahaed and take a closer look at this data within
+                the county.
             </p>
         {/snippet}
 
         {#snippet scrolly()}
             <ArticleText>
                 <strong
-                    >Why did the right charachter struggle with finding a job?</strong
+                    >Why did the charachter on the right struggle with finding a
+                    job?</strong
                 >
             </ArticleText>
 
             <ArticleText>
                 It would be safe to assume that because small business are
-                opening, then that would indicate more job opportunities,
-                nationally that is the strong case, but in <strong
+                opening, then that would indicate more job opportunities.
+                Nationally this is true, but in <strong
                     >Hudson county, NJ</strong
                 >
-                that isn't the case.
+                this isn't the case.
             </ArticleText>
 
             <ArticleText>
-                Let't take a closer look at the data in order to understand why
-                this is the case nationally.
+                Let't take a closer look at the data (on the left) in order to
+                understand why this is not the case within New Jersey first.
             </ArticleText>
 
             <ArticleText>
-                This is <strong>just one way</strong> that scrollytelling can
-                look.
-                <br /><br />
-                <strong>
-                    If you use this template, be sure to modify it and make it
-                    your own!
-                </strong>
+                As you can see from the numbers the total number of loans
+                distributed across the years has been increasing, which would be
+                considered a great thing because, more jobs = more job
+                opportunities, RIGHT ?
             </ArticleText>
         {/snippet}
     </Scroller>
