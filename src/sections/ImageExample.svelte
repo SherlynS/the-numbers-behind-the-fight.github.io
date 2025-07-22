@@ -3,8 +3,8 @@
     import ArticleText from "../lib/ArticleText.svelte";
     import lackOfFunds from "./lack_of_funding.jpg";
     import attainedDegress from "./percent_of_degrees_attained_nj.jpg";
-    import { onMount } from 'svelte';
-    
+    import { onMount } from "svelte";
+
     let showSecondImage = false;
     let imageVisible = true;
 
@@ -15,7 +15,7 @@
 </script>
 
 <div>
-   <Scroller layout="left">
+    <Scroller layout="left">
         {#snippet sticky()}
             {#if imageVisible}
                 <div class="image-container">
@@ -36,13 +36,18 @@
             {/if}
 
             <button on:click={toggleSecondImage} class="toggle-button">
-                {showSecondImage ? "Show Funding Chart" : "Show Education Statistics"}
+                {showSecondImage
+                    ? "Show Funding Chart"
+                    : "Show Education Statistics"}
             </button>
             <div>
-                <p>Feel free to click on the button to switch between charts.</p>
+                <p>
+                    Feel free to click on the button to switch between charts.
+                </p>
                 <p>
                     <strong>
-                        These charts show education funding and achievement data for New Jersey.
+                        These charts show education funding and achievement data
+                        for New Jersey.
                     </strong>
                 </p>
             </div>
@@ -56,8 +61,8 @@
                 undersourced due to either their low graduation rate or low
                 testing rate. This website dives into the lack of funding
                 specifically towards New Jersey black and latino students.
-                <br>
-                <br>
+                <br />
+                <br />
                 <strong>
                     <a
                         href="https://edlawcenter.org/research/the-color-of-opportunity/"
@@ -65,8 +70,8 @@
                         Click here: The Color of Opportunity</a
                     >
                 </strong>
-                <br>
-                <br>
+                <br />
+                <br />
                 Due to the lack of funding in education within NJ, it is evident
                 that it is hard for current generations to find jobs, as we previously
                 saw in our data.
@@ -84,7 +89,7 @@
     .chart-image {
         transition: opacity 0.5s ease-in-out;
     }
-    
+
     .toggle-button {
         margin: 20px;
         padding: 20px;
@@ -102,15 +107,16 @@
         transform: translateY(2px);
         box-shadow: 0 2px 0 #007052;
     }
-    .fade-in {
-        animation: fadeIn 0.5s ease-in-out;
-    }
-    
+
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
-    
+
     .image-container {
         position: relative;
     }
